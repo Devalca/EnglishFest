@@ -130,7 +130,7 @@
 
     {{-- Floating WA --}}
     <div class="fixed bottom-5 right-5 z-10">
-        <a href="https://wa.me/xxxxxxxxxx" target="_blank" rel="noopener noreferrer"
+        <a href="https://wa.me/6281213867630" target="_blank" rel="noopener noreferrer"
             class="p-4 w-16 h-16 bg-green-500 text-white rounded-full shadow-md flex items-center justify-center hover:bg-green-600 transition duration-300 ease-in-out">
             <svg fill="#ffffff" height="200px" width="200px" version="1.1" id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 308 308"

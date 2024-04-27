@@ -8,11 +8,14 @@ use App\Filament\User\Resources\CompetitionResource\RelationManagers\MembersRela
 use App\Models\Competition;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class CompetitionResource extends Resource
 {
@@ -44,6 +47,7 @@ class CompetitionResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(null)
             ->modifyQueryUsing(function (Builder $query) {
                 $get_id = auth()->user()->id;
                 $query->where('user_id', $get_id);
@@ -57,7 +61,7 @@ class CompetitionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Detail & Daftarkan Peserta'),
+                Tables\Actions\EditAction::make()->label('Detail & Daftarkan Peserta')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

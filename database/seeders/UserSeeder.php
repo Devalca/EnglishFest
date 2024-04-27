@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name'=>'BOT University',
-            'email'=>'admin@admin.com',
+            'email'=>'saepul.rahman@nusaputra.ac.id',
             'is_admin'=>true,
-            'password'=>Hash::make('qweasd123'),
+            'password'=>Hash::make('485,~\KjUWj*yNSazQ_>CG&i'),
             'email_verified_at'=>now(),
             'remember_token'=>Str::random(10),
             'created_at'=>date("Y-m-d H:i:s"),

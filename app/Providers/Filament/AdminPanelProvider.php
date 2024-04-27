@@ -43,6 +43,10 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Beranda')
                     ->url('/')
                     ->icon('heroicon-o-cog-6-tooth'),
+                MenuItem::make()
+                    ->label('Issue File Fix')
+                    ->url('/repair')
+                    ->icon('heroicon-o-wrench-screwdriver')
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -52,7 +56,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

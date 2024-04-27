@@ -10,10 +10,32 @@ class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
+    protected static string $view = 'filament.resources.user-resource.pages.zero-users';
+
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+        $cek = $this->record;
+        if ($cek != true) {
+            return [
+                Actions\DeleteAction::make(),
+                // Actions\DeleteAction::make()
+                // ->before(function (DeleteAction $action) {
+                //     if ($this->record->user_id != auth()->user()->id) {
+                //         Notification::make()
+                //             ->danger()
+                //             ->title('Anda Siapa???')
+                //             ->body('Sepertinya Pendaftaran ini Milik orang lain?')
+                //             ->persistent()
+                //             ->send();
+
+                //         $action->cancel();
+                //     }
+                // })
+            ];
+        } else {
+            return [
+                
+            ];
+        }
     }
 }

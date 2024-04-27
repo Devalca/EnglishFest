@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('education')->nullable();
             $table->boolean('is_admin')->default(false);
+            $table->boolean('is_rator')->default(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
