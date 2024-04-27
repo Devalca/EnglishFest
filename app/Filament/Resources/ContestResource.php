@@ -7,7 +7,9 @@ use App\Filament\Resources\ContestResource\RelationManagers;
 use App\Models\Contest;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\MarkdownEditor;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
@@ -28,34 +30,66 @@ class ContestResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('parent_id')
-                    ->live()
-                    ->relationship(
-                        name: 'parent',
-                        titleAttribute: 'program_name',
-                        modifyQueryUsing: fn (Builder $query) => $query->where('parent_id', null),
-                    ),
-                Forms\Components\TextInput::make('program_name')->required(),
-                Forms\Components\FileUpload::make('image')
-                    ->hidden(fn (Get $get) => $get('parent_id') == null)
-                    ->directory('file-contest')
-                    ->acceptedFileTypes(['image/png', 'image/jpeg'])
-                    ->downloadable(),
-                Forms\Components\FileUpload::make('guidelines')
-                    ->hidden(fn (Get $get) => $get('parent_id') == null)
-                    ->directory('file-guidelines')
-                    ->acceptedFileTypes([
-                        'application/pdf',
+                Section::make()
+                    ->schema([
+                        Forms\Components\Select::make('parent_id')
+                            ->label('Nama Lomba')
+                            ->hint('Kosongkan Jika Ingin Membuat Lomba Baru')
+                            ->hintColor('danger')
+                            ->helperText(new HtmlString('<span style="color: green;">Pilih Lomba Untuk Mendaftarkan Program Lomba</span>'))
+                            ->live()
+                            ->relationship(
+                                name: 'parent',
+                                titleAttribute: 'program_name',
+                                modifyQueryUsing: fn (Builder $query) => $query->where('parent_id', null),
+                            ),
+                        Forms\Components\TextInput::make('program_name')
+                            ->label('Nama Program Untuk Lomba Tertentu')->required(),
+                        Forms\Components\FileUpload::make('image')
+                            ->required()
+                            ->label('Gambar Lomba')
+                            ->hidden(fn (Get $get) => $get('parent_id') == null)
+                            ->directory('file-contest')
+                            ->acceptedFileTypes(['image/png', 'image/jpeg'])
+                            ->downloadable(),
+                        Forms\Components\FileUpload::make('guidelines')
+                            ->required()
+                            ->label('Panduan')
+                            ->hidden(fn (Get $get) => $get('parent_id') == null)
+                            ->directory('file-guidelines')
+                            ->acceptedFileTypes([
+                                'application/pdf',
+                            ])
+                            ->downloadable(),
+                    ])->columnSpan(8),
+                Section::make()
+                    ->schema([
+                        DatePicker::make('time_start')->hidden(fn (Get $get) => $get('parent_id') == null)->required(),
+                        DatePicker::make('time_end')->hidden(fn (Get $get) => $get('parent_id') == null)->required(),
+                    ])->columnSpan(4),
+                Forms\Components\Textarea::make('desc')
+                    ->label('Keterangan Lomba')->columnSpanFull(),
+                MarkdownEditor::make('condition')
+                    ->disableToolbarButtons([
+                        'attachFiles',
                     ])
-                    ->downloadable(),
-                DatePicker::make('time_start')->hidden(fn (Get $get) => $get('parent_id') == null),
-                DatePicker::make('time_end')->hidden(fn (Get $get) => $get('parent_id') == null),
-                Forms\Components\Textarea::make('desc'),
-                RichEditor::make('condition')->hidden(fn (Get $get) => $get('parent_id') == null),
-                RichEditor::make('terms')->hidden(fn (Get $get) => $get('parent_id') == null),
-                RichEditor::make('assessment')->hidden(fn (Get $get) => $get('parent_id') == null),
-                RichEditor::make('awards')->hidden(fn (Get $get) => $get('parent_id') == null),
-            ]);
+                    ->label('PERSYARATAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+                MarkdownEditor::make('terms')
+                    ->disableToolbarButtons([
+                        'attachFiles',
+                    ])
+                    ->label('KETENTUAN DAN TAHAPAN PERLOMBAAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+                MarkdownEditor::make('assessment')
+                    ->disableToolbarButtons([
+                        'attachFiles',
+                    ])
+                    ->label('ASPEK PENILAIAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+                MarkdownEditor::make('awards')
+                    ->disableToolbarButtons([
+                        'attachFiles',
+                    ])
+                    ->label('HADIAH DAN PENGHARGAAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+            ])->columns(12);
     }
 
     public static function table(Table $table): Table

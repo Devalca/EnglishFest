@@ -6,6 +6,7 @@ use App\Filament\Resources\CompetitionResource\Pages;
 use App\Filament\Resources\CompetitionResource\RelationManagers;
 use App\Filament\Resources\CompetitionResource\RelationManagers\MembersRelationManager;
 use App\Models\Competition;
+use App\Models\Member;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -47,9 +48,10 @@ class CompetitionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('contest_id'),
-                Tables\Columns\TextColumn::make('coach_name'),
-                Tables\Columns\TextColumn::make('coach_phone'),
+                Tables\Columns\TextColumn::make('users.education')->label('Nama Sekolah'),
+                Tables\Columns\TextColumn::make('coach_name')->label('Nama Pembimbing'),
+                Tables\Columns\TextColumn::make('coach_phone')->label('Nomor Telephone'),
+                Tables\Columns\TextColumn::make('members.name')
             ])
             ->filters([
                 //
