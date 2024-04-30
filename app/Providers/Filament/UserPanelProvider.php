@@ -33,10 +33,10 @@ class UserPanelProvider extends PanelProvider
             ->registration(Register::class)
             ->profile()
             ->sidebarCollapsibleOnDesktop()
-            ->passwordReset()
+            // ->passwordReset()
             ->login()
             ->colors([
-                'primary' => Color::Rose,
+                'primary' => Color::Blue,
             ])
             ->navigationItems([
                 NavigationItem::make('dashboard')

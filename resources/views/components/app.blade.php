@@ -30,8 +30,8 @@
         }
 
         .nav-link.active {
-            color: #f9395f;
-            border-bottom: 2px solid #f9395f;
+            color: #1a9df7;
+            border-bottom: 2px solid #1a9df7;
         }
     </style>
 </head>
@@ -47,10 +47,10 @@
     </main>
 
     <!-- Page Footer -->
-    <footer class="p-10 bg-[#f9395f] text-white">
+    <footer class="p-10 bg-[#1a9df7] text-white">
         <div class="mx-auto max-w-screen-xl">
             <div class="md:flex md:justify-between">
-                <div class="mb-6 md:mb-0" style="width: 60%">
+                <div class="mb-6 md:mb-0 w-full lg:w-96">
                     <a href="#" class="flex items-center">
                         {{-- <img src="{{ asset('assets/nsp.png') }}" class="mr-3 h-8" alt="KOI" /> --}}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -78,10 +78,16 @@
                     <div>
                         <h2 class="mb-6 text-sm font-semibold  uppercase ">Hubungi kami</h2>
                         <ul class=" dark:text-gray-400">
-                            {{-- <li class="mb-4">
-                                <a href="#" target="_blank" rel="noopener noreferrer"
-                                    class="hover:underline ">Whatsapp</a>
-                            </li> --}}
+                            <li class="mb-4">
+                                <a href="https://wa.me/6285720978940" target="_blank" rel="noopener noreferrer"
+                                    class="hover:underline ">085720978940 (Cindy Amelia)
+                                </a>
+                            </li>
+                            <li class="mb-4">
+                                <a href="https://wa.me/6285863102497" target="_blank" rel="noopener noreferrer"
+                                    class="hover:underline ">085863102497 (Ridha Khairunnisa)
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div>
@@ -130,7 +136,7 @@
 
     {{-- Floating WA --}}
     <div class="fixed bottom-5 right-5 z-10">
-        <a href="https://wa.me/6281213867630" target="_blank" rel="noopener noreferrer"
+        <a href="https://wa.me/6285720978940" target="_blank" rel="noopener noreferrer"
             class="p-4 w-16 h-16 bg-green-500 text-white rounded-full shadow-md flex items-center justify-center hover:bg-green-600 transition duration-300 ease-in-out">
             <svg fill="#ffffff" height="200px" width="200px" version="1.1" id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 308 308"

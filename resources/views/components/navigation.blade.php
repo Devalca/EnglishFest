@@ -1,19 +1,15 @@
 <header>
-    <nav class="z-40 fixed w-full bg-white border border-b-[#f9395f] px-4 lg:px-6 py-4">
+    <nav class="z-40 fixed w-full bg-white border border-b-[#1a9df7] px-4 lg:px-6 py-4">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="#f9395f" class="w-10 h-10">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
-                </svg>
-                <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span>
+                <img src="{{ asset('assets/img/logo.png') }}" class="w-16 mr-5" alt="Flowbite Logo" />
+                {{-- <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span> --}}
             </a>
             <div class="flex items-center lg:order-2">
                 @if (Auth::user())
                     <div class="hidden lg:flex">
                         <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                            class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#f9395f] md:p-0 md:w-auto">
+                            class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#1a9df7] md:p-0 md:w-auto">
                             {{ auth()->user() == null ? '' : auth()->user()->name }}
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
@@ -26,19 +22,19 @@
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                                 <li>
                                     <a href="{{ Auth::user()->is_admin == true ? '/admin' : '/user' }}"
-                                        class="hover:text-white block px-4 py-2 hover:bg-[#f9395f]">Dashboard</a>
+                                        class="hover:text-white block px-4 py-2 hover:bg-[#1a9df7]">Dashboard</a>
                                 </li>
                             </ul>
                             <div class="py-1">
                                 <a href="{{ route('logout') }}"
-                                    class="hover:text-white block px-4 py-2 text-sm text-gray-700 hover:bg-[#f9395f]">Sign
+                                    class="hover:text-white block px-4 py-2 text-sm text-gray-700 hover:bg-[#1a9df7]">Sign
                                     out</a>
                             </div>
                         </div>
                     </div>
                 @else
                     <a href="/user"
-                        class="ml-5 text-white bg-[#f9395f] hover:bg-[#a80062c5] focus:ring-4 focus:ring-[#a80062c1] font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2">Log
+                        class="ml-5 text-white bg-[#1a9df7] hover:bg-[#a80062c5] focus:ring-4 focus:ring-[#a80062c1] font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2">Log
                         In</a>
                 @endif
                 <button data-collapse-toggle="mobile-menu-2" type="button"
@@ -60,45 +56,45 @@
             </div>
             <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                    <li class="lg:hidden bg-[#f9395f] border rounded-lg">
-                        <span class="block py-2 px-3 text-white md:bg-transparent md:p-0">
-                            {{ auth()->user() == null ? '' : auth()->user()->name }}
-                        </span>
-                    </li>
                     @auth
+                        <li class="lg:hidden bg-[#1a9df7] border rounded-lg">
+                            <span class="block py-2 px-3 text-white md:bg-transparent md:p-0">
+                                {{ auth()->user() == null ? '' : auth()->user()->name }}
+                            </span>
+                        </li>
                         <li class="lg:hidden">
-                            <a href="/user" class="block py-2 px-3 hover:text-[#f9395f] rounded md:bg-transparent md:p-0">
+                            <a href="/user" class="block py-2 px-3 hover:text-[#1a9df7] rounded md:bg-transparent md:p-0">
                                 Dasbor
                             </a>
                         </li>
                     @endauth
                     <li>
                         <a href="{{ url('') == url()->current() ? '#home' : url('') . '#home' }}"
-                            class="nav-link block py-2 px-3 hover:text-[#f9395f] md:bg-transparent md:p-0"
+                            class="nav-link block py-2 px-3 hover:text-[#1a9df7] md:bg-transparent md:p-0"
                             aria-current="page">Beranda</a>
                     </li>
                     <li>
                         <a href="{{ url('') == url()->current() ? '#compe' : url('') . '#compe' }}"
-                            class="nav-link block py-2 px-3 hover:text-[#f9395f] md:bg-transparent md:p-0"
+                            class="nav-link block py-2 px-3 hover:text-[#1a9df7] md:bg-transparent md:p-0"
                             aria-current="page"> Kompetisi
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('') == url()->current() ? '#contact' : url('') . '#contact' }}"
-                            class="nav-link block py-2 px-3 hover:text-[#f9395f] md:bg-transparent md:p-0"
+                            class="nav-link block py-2 px-3 hover:text-[#1a9df7] md:bg-transparent md:p-0"
                             aria-current="page">
                             Kontak</a>
                     </li>
                     <li>
                         <a href="{{ url('') == url()->current() ? '#about' : url('') . '#about' }}"
-                            class="nav-link block py-2 px-3 hover:text-[#f9395f] md:bg-transparent md:p-0"
+                            class="nav-link block py-2 px-3 hover:text-[#1a9df7] md:bg-transparent md:p-0"
                             aria-current="page">
                             Tentang
                         </a>
                     </li>
                     <li class="lg:hidden">
                         <a href="{{ route('logout') }}"
-                            class="block py-2 px-3 hover:text-[#f9395f] rounded md:bg-transparent md:p-0">Sign
+                            class="block py-2 px-3 hover:text-[#1a9df7] rounded md:bg-transparent md:p-0">Sign
                             out</a>
                     </li>
                 </ul>

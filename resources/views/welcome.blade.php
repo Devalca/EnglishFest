@@ -1,19 +1,20 @@
 <x-app>
 
-    <div id="home" class="pb-28">
+    <div id="home" class="lg:pb-28 pb-8">
         <section id="header" class="bg-white">
-            <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-                <div class="mr-auto mt-20 place-self-center lg:col-span-6">
+            <div
+                class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 text-center lg:text-left">
+                <div class="lg:mr-auto mt-20 place-self-center lg:col-span-6">
                     <p class="max-w-2xl mb-4">Selamat Datang di</p>
                     <h1
                         class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl ">
-                        English Fest <span class="text-[#f9395f] font-extrabold">2024</span></h1>
+                        English Fest <span class="text-[#1a9df7] font-extrabold">2024</span></h1>
                     <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">Englsih Fest adalah
                         program kerja tahunan dari English Club Nusa Putra
                         University yang diadakan sebagai wadah minat dan bakat siswa/i di seluruh Indonesia dalam
                         berbahasa Inggris.</p>
                     <a href="/user/login"
-                        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#f9395f] border border-[#f9395f] hover:text-white hover:bg-[#f9395f] rounded-full">
+                        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1a9df7] border border-[#1a9df7] hover:text-white hover:bg-[#1a9df7] rounded-full">
                         START EXPLORING
                     </a>
                 </div>
@@ -26,14 +27,22 @@
 
     <section class="bg-[#f9fafb]">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <h1 class="text-center mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
-                We support the potential of all students</h1>
-            <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
-                NET Menawarkan hadiah bagi juara di tiap cabang lomba berupa Beasiswa Kuliah Full di Universitas Nusa
-                Putra selama 8 semester, Uang tunai, Sertifikat tingkat Nasional, dan Piala/Medali.</p>
-            <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
+            {{-- <h1 class="text-center mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
+                We support the potential of all students</h1> --}}
+            <figure class="max-w-screen-md mx-auto text-center">
+                <svg class="w-10 h-10 mx-auto mb-3 text-gray-400 dark:text-gray-600" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
+                    <path
+                        d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
+                </svg>
+                <blockquote>
+                    <p class="text-2xl italic font-medium text-gray-900 dark:text-white">"Set Your Dream Alight, Let
+                        Your Imagination Take Flight."</p>
+                </blockquote>
+            </figure>
+            {{-- <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
                 Kegiatan ini terbuka untuk seluruh siswa/i di Indonesia tanpa terkecuali, dengan timeline pelaksanaan
-                tertera pada paduan perlombaan.</p>
+                tertera pada paduan perlombaan.</p> --}}
             <div class="inline-flex items-center justify-center w-full">
                 <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded ">
                 <div class="absolute px-4 -translate-x-1/2 bg-[#f9fafb] left-1/2 ">
@@ -58,8 +67,8 @@
                         yang sesuai untuk kalian</p>
                 </div>
                 @foreach ($contests as $item)
-                    <h4 class="mb-4 text-3xl font-extrabold text-gray-900">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r to-[#f9395f] from-sky-400">
+                    <h4 class="mb-5 text-3xl font-extrabold text-gray-900 text-center lg:text-left">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r to-[#7150b5] from-sky-400">
                             {{ $item->program_name }}
                         </span>
                     </h4>
@@ -67,8 +76,8 @@
                         @foreach ($programs->where('parent_id', $item->id) as $prog)
                             <div class="grid grid-rows-2 grid-flow-col gap-2">
                                 <a href="{{ route('home.contestDetail', ['contest' => $prog]) }}"
-                                    class="border border-[#f9395f] shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                                    <div class="flex items-center px-6 py-4">
+                                    class="overflow-hidden transition duration-300 transform hover:-translate-y-1">
+                                    <div class="flex items-center">
                                         <div class="flex-shrink-0 relative">
                                             <div class="rounded-lg overflow-hidden border-2 border-gray-300 w-36 h-36">
                                                 <img class="object-cover w-full h-full"
@@ -77,9 +86,10 @@
                                             </div>
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-xl font-semibold text-[#f9395f]">{{ $prog->program_name }}
+                                            <div class="text-xl font-semibold text-[#1a9df7]">{{ $prog->program_name }}
                                             </div>
-                                            <div class="flex justify-between">
+                                            <p class="line-clamp-2 py-2">{{ $prog->desc }}</p>
+                                            <div class="flex">
                                                 <span
                                                     class="bg-green-200 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400">
                                                     {{ \Carbon\Carbon::parse($prog->time_start)->format('d - m - Y') }}
@@ -89,7 +99,7 @@
                                                     {{ \Carbon\Carbon::parse($prog->time_end)->format('d - m - Y') }}
                                                 </span>
                                             </div>
-
+                                            <hr class="mt-2">
                                         </div>
                                     </div>
                                 </a>
@@ -99,7 +109,7 @@
                                         download>Unduh Panduan</a>
                                 </div>
                             </div>
-                            {{-- <div class="items-center bg-[#f9395f] rounded-lg shadow sm:flex ">
+                            {{-- <div class="items-center bg-[#1a9df7] rounded-lg shadow sm:flex ">
                                 <img class="ml-2 w-36 border rounded-lg" src="{{ asset('storage/' . $prog->image) }}"
                                     alt="Bonnie Avatar">
                                 <div class="p-5">
@@ -121,7 +131,7 @@
     </div>
 
     <div id="contact">
-        <section class="bg-[#f9fafb] py-14">
+        <section class="bg-[#f9fafb] py-14 px-8">
             <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
                 English Fest merupakan hasil rancangan English Club Nusa Putra University, dibantu oleh pihak kampus
                 sebagai
@@ -131,7 +141,7 @@
 
             <div class="flex flex-wrap justify-center">
                 <!-- Card 1: WhatsApp -->
-                <a href="https://api.whatsapp.com/send?phone=6281213867630" target="_blank"
+                <a href="https://api.whatsapp.com/send?phone=6285720978940" target="_blank"
                     class="border border-green-500 max-w-sm w-full mx-4 my-4 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="flex items-center px-6 py-4">
                         <div class="flex-shrink-0">
@@ -156,10 +166,10 @@
 
                 <!-- Card 2: Email -->
                 <a href="mailto:englishclub@nusaputra.ac.id" target="_blank"
-                    class="border border-[#f9395f] max-w-sm w-full mx-4 my-4 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    class="border border-[#1a9df7] max-w-sm w-full mx-4 my-4 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="flex items-center px-6 py-4">
                         <div class="flex-shrink-0">
-                            <svg class="w-16 h-16 text-[#f9395f]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            <svg class="w-16 h-16 text-[#1a9df7]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path
                                     d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z" />
@@ -168,17 +178,17 @@
                             </svg>
                         </div>
                         <div class="ml-4">
-                            <div class="text-xl font-semibold text-[#f9395f]">Email</div>
+                            <div class="text-xl font-semibold text-[#1a9df7]">Email</div>
                             <div class="mt-2 text-gray-600">Kirim email</div>
                             <div class="mt-2">
-                                <span class="text-[#f9395f] hover:underline">Klik di sini</span>
+                                <span class="text-[#1a9df7] hover:underline">Klik di sini</span>
                             </div>
                         </div>
                     </div>
                 </a>
 
                 <!-- Card 3: Instagram -->
-                <a href="https://www.instagram.com/englishclubnsp/" target="_blank"
+                <a href="https://www.instagram.com/englishfest_nsp/" target="_blank"
                     class="border border-pink-500 max-w-sm w-full mx-4 my-4 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="flex items-center px-6 py-4">
                         <div class="flex-shrink-0">
@@ -205,7 +215,7 @@
             <div class="py-2">
                 <div class="px-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
-                        <div class="p-6 bg-white border-4 border-[#f9395f]">
+                        <div class="p-6 bg-white border-4 border-[#1a9df7]">
                             @include('components.htm')
                         </div>
                     </div>

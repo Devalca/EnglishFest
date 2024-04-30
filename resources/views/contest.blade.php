@@ -53,12 +53,15 @@
         </div>
     </div>
 
+    <section class="py-11 lg:py-0">
+    </section>
+
     <section class="bg-white px-5 lg:px-0 py-5">
         <div class="grid max-w-screen-xl mx-auto lg:gap-8 xl:gap-0 lg:pt-32 lg:grid-cols-12">
             <div class="mr-auto place-self-center lg:col-span-7">
-                <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
+                <h1 class="lg:text-left text-center max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
                     {{ $contests->program_name }}</h1>
-                <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">{{ $contests->desc }}
+                <p class="lg:text-left text-center max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">{{ $contests->desc }}
                 </p>
                 <a href="{{ asset('storage/' . $contests->guidelines) }}"
                     class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100">
@@ -89,7 +92,7 @@
                 @endif
                 @if (count($compes) > 0)
                     <a href="/user/competitions"
-                        class="bg-[#f9395f] rounded-md text-white hover:text-[#f9395f] hover:bg-white border hover:border-[#f9395f] inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center">
+                        class="bg-[#1a9df7] rounded-md text-white hover:text-[#1a9df7] hover:bg-white border hover:border-[#1a9df7] inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center">
                         Daftarkan Peserta
                     </a>
                 @endif
@@ -106,7 +109,7 @@
     <div class="py-2 px-5 lg:px-0">
         <div class="max-w-7xl mx-auto">
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
-                <div class="p-6 bg-white border-4 border-[#f9395f]">
+                <div class="p-6 bg-white border-4 border-[#1a9df7]">
                     @include('components.htm')
                 </div>
             </div>
