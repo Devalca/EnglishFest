@@ -145,19 +145,19 @@
         <div id="default-tab-content">
             <div class="hidden p-4 rounded-lg bg-gray-50 overflow-auto" id="persyaratan" role="tabpanel"
                 aria-labelledby="persyaratan-tab">
-                <p class="text-sm text-gray-500">{!! $contests->condition !!}</p>
+                <div class="text-sm text-gray-500">{!! $contests->condition !!}</div>
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 overflow-auto" id="ketentuan" role="tabpanel"
                 aria-labelledby="ketentuan-tab">
-                <p class="text-sm text-gray-500 ">{!! $contests->terms !!}</p>
+                <div class="text-sm text-gray-500 ">{!! $contests->terms !!}</div>
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 overflow-auto" id="penilaian" role="tabpanel"
                 aria-labelledby="penilaian-tab">
-                <p class="text-sm text-gray-500 ">{!! $contests->assessment !!}</p>
+                <div class="text-sm text-gray-500 ">{!! $contests->assessment !!}</div>
             </div>
             <div class="hidden p-4 rounded-lg bg-gray-50 overflow-auto" id="hadiah" role="tabpanel"
                 aria-labelledby="hadiah-tab">
-                <p class="text-sm text-gray-500 ">{!! $contests->awards !!}</p>
+                <div class="text-sm text-gray-500 ">{!! $contests->awards !!}</div>
             </div>
         </div>
     </section>

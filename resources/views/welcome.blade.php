@@ -67,14 +67,14 @@
                         yang sesuai untuk kalian</p>
                 </div>
                 @foreach ($contests as $item)
-                    <h4 class="mb-5 text-3xl font-extrabold text-gray-900 text-center lg:text-left">
+                    <h4 class="my-5 text-3xl font-extrabold text-gray-900 text-center lg:text-left">
                         <span class="text-transparent bg-clip-text bg-gradient-to-r to-[#7150b5] from-sky-400">
                             {{ $item->program_name }}
                         </span>
                     </h4>
-                    <div class="grid gap-4 md:grid-cols-2" style="height: 220px">
+                    <div class="grid gap-4 md:grid-cols-2">
                         @foreach ($programs->where('parent_id', $item->id) as $prog)
-                            <div class="grid grid-rows-2 grid-flow-col gap-2">
+                            <div class="grid gap-2">
                                 <a href="{{ route('home.contestDetail', ['contest' => $prog]) }}"
                                     class="overflow-hidden transition duration-300 transform hover:-translate-y-1">
                                     <div class="flex items-center">
@@ -88,8 +88,8 @@
                                         <div class="ml-4">
                                             <div class="text-xl font-semibold text-[#1a9df7]">{{ $prog->program_name }}
                                             </div>
-                                            <p class="line-clamp-2 py-2">{{ $prog->desc }}</p>
-                                            <div class="flex">
+                                            <p class="line-clamp-2">{{ $prog->desc }}</p>
+                                            <div class="flex py-2">
                                                 <span
                                                     class="bg-green-200 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-400">
                                                     {{ \Carbon\Carbon::parse($prog->time_start)->format('d - m - Y') }}
@@ -236,7 +236,7 @@
         </section>
     </div>
 
-    <div id="about" class="lg:py-16">
+    <div id="about" class="lg:py-16 py-8">
         <section class="mx-auto max-w-screen-xl px-5 lg:px-0 pb-16">
             <h1 class="text-4xl font-bold text-center mb-8">Tentang Kami</h1>
             <div class="flex flex-col md:flex-row items-center justify-center gap-8">

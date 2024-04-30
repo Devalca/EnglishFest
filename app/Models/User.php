@@ -54,10 +54,18 @@ class User extends Authenticatable implements FilamentUser
     {
         switch ($panel->getId()) {
             case 'admin':
-                return $this->is_admin == true;
+                if ($this->is_admin || $this->is_rator) {
+                    return true; // Masuk ke panel admin
+                } else {
+                    return false; // Tidak memenuhi syarat untuk panel admin
+                }
                 break;
             default:
-                return $this->is_admin == false;
+                  if ($this->is_admin || $this->is_rator) {
+                      return false; // Masuk ke panel admin
+                  } else {
+                      return true; // Tidak memenuhi syarat untuk panel admin
+                  }
                 break;
         }
     }

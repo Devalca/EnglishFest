@@ -21,8 +21,13 @@
                             class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="{{ Auth::user()->is_admin == true ? '/admin' : '/user' }}"
-                                        class="hover:text-white block px-4 py-2 hover:bg-[#1a9df7]">Dashboard</a>
+                                    @if (Auth::user()->is_rator == true || Auth::user()->is_admin == true)
+                                        <a href="/admin"
+                                            class="hover:text-white block px-4 py-2 hover:bg-[#1a9df7]">Dashboard</a>
+                                    @else
+                                        <a href="/user"
+                                            class="hover:text-white block px-4 py-2 hover:bg-[#1a9df7]">Dashboard</a>
+                                    @endif
                                 </li>
                             </ul>
                             <div class="py-1">

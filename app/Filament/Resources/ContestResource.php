@@ -8,6 +8,7 @@ use App\Models\Contest;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
@@ -69,22 +70,22 @@ class ContestResource extends Resource
                     ])->columnSpan(4),
                 Forms\Components\Textarea::make('desc')
                     ->label('Keterangan Lomba')->columnSpanFull(),
-                MarkdownEditor::make('condition')
+                RichEditor::make('condition')
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
                     ->label('PERSYARATAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
-                MarkdownEditor::make('terms')
+                RichEditor::make('terms')
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
                     ->label('KETENTUAN DAN TAHAPAN PERLOMBAAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
-                MarkdownEditor::make('assessment')
+                RichEditor::make('assessment')
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
                     ->label('ASPEK PENILAIAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
-                MarkdownEditor::make('awards')
+                RichEditor::make('awards')
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
