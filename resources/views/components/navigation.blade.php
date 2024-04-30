@@ -64,13 +64,19 @@
                     @auth
                         <li class="lg:hidden bg-[#1a9df7] border rounded-lg">
                             <span class="block py-2 px-3 text-white md:bg-transparent md:p-0">
-                                {{ auth()->user() == null ? '' : auth()->user()->name }}
+                                Hello, {{ auth()->user() == null ? '' : auth()->user()->name }}
                             </span>
                         </li>
                         <li class="lg:hidden">
-                            <a href="/user" class="block py-2 px-3 hover:text-[#1a9df7] rounded md:bg-transparent md:p-0">
-                                Dasbor
-                            </a>
+                            @if (Auth::user()->is_rator == true || Auth::user()->is_admin == true)
+                                <a href="/admin"
+                                    class="nav-link block py-2 px-3 hover:text-[#1a9df7] md:bg-transparent md:p-0"
+                                    aria-current="page">Dashboard</a>
+                            @else
+                                <a href="/user"
+                                    class="nav-link block py-2 px-3 hover:text-[#1a9df7] md:bg-transparent md:p-0"
+                                    aria-current="page">Dashboard</a>
+                            @endif
                         </li>
                     @endauth
                     <li>
@@ -97,11 +103,13 @@
                             Tentang
                         </a>
                     </li>
-                    <li class="lg:hidden">
-                        <a href="{{ route('logout') }}"
-                            class="block py-2 px-3 hover:text-[#1a9df7] rounded md:bg-transparent md:p-0">Sign
-                            out</a>
-                    </li>
+                    @auth
+                        <li class="lg:hidden">
+                            <a href="{{ route('logout') }}"
+                                class="block py-2 px-3 hover:text-[#1a9df7] rounded md:bg-transparent md:p-0">Sign
+                                out</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
