@@ -51,17 +51,19 @@
         <div class="mx-auto max-w-screen-xl">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0 w-full lg:w-96">
-                    <a href="#" class="flex items-center">
-                        {{-- <img src="{{ asset('assets/nsp.png') }}" class="mr-3 h-8" alt="KOI" /> --}}
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="#fff" class="w-10 h-10">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
-                        </svg>
-                        <span
-                            class="ml-3 self-center lg:text-2xl text-sm font-semibold whitespace-nowrap ">{{ config('app.name') }}</span>
-                    </a>
-                    <p class="mt-3 text-wrap">Englsih Fest adalah program kerja tahunan dari English Club Nusa Putra
+                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow">
+                        <a href="#" class="flex items-center">
+                            <img src="{{ asset('assets/img/logo.png') }}" class="mr-3 h-8" alt="English Club" />
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="#fff" class="w-10 h-10">
+                             <path stroke-linecap="round" stroke-linejoin="round"
+                                 d="m21 7.5-2.25-1.313M21 7.5v2.25m0-2.25-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3 2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75 2.25-1.313M12 21.75V19.5m0 2.25-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
+                         </svg> --}}
+                            <span
+                                class="text-[#1a9df7] ml-3 self-center lg:text-2xl text-sm font-semibold whitespace-nowrap ">{{ config('app.name') }}</span>
+                        </a>
+                    </div>
+                    <p class="mt-3 text-wrap">English Fest adalah program kerja tahunan dari English Club Nusa Putra
                         University
                         yang diadakan sebagai wadah minat dan bakat siswa/i di seluruh Indonesia dalam berbahasa
                         Inggris.</p>
