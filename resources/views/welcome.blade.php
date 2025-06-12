@@ -6,20 +6,29 @@
                 class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 text-center lg:text-left">
                 <div class="lg:mr-auto mt-20 place-self-center lg:col-span-6">
                     <p class="max-w-2xl mb-4">Selamat Datang di</p>
+                    @php
+                        $titleWithYearHighlight = preg_replace(
+                            '/\b(\d{4})\b/',
+                            '<span class="text-[#1a9df7] font-extrabold">$1</span>',
+                            $homeContent->title,
+                        );
+                    @endphp
+
                     <h1
-                        class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl ">
-                        English Fest <span class="text-[#1a9df7] font-extrabold">2024</span></h1>
-                    <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">English Fest adalah
-                        program kerja tahunan dari English Club Nusa Putra
-                        University yang diadakan sebagai wadah minat dan bakat siswa/i di seluruh Indonesia dalam
-                        berbahasa Inggris.</p>
+                        class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
+                        {!! $titleWithYearHighlight !!}
+                    </h1>
+
+                    <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">
+                        {{ $homeContent->description }}
+                    </p>
                     <a href="/user/login"
                         class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1a9df7] border border-[#1a9df7] hover:text-white hover:bg-[#1a9df7] rounded-full">
                         START EXPLORING
                     </a>
                 </div>
                 <div class="hidden lg:mt-20 lg:col-span-6 lg:flex lg:px-0">
-                    <img src="{{ asset('assets/img/team.png') }}" alt="English Fest">
+                    <img src="{{ asset('storage/' . $homeContent->hero_image) }}" alt="Hero Image">
                 </div>
             </div>
         </section>
@@ -27,8 +36,6 @@
 
     <section class="bg-[#f9fafb]">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            {{-- <h1 class="text-center mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
-                We support the potential of all students</h1> --}}
             <figure class="max-w-screen-md mx-auto text-center">
                 <svg class="w-10 h-10 mx-auto mb-3 text-gray-400 dark:text-gray-600" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
@@ -36,13 +43,11 @@
                         d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
                 </svg>
                 <blockquote>
-                    <p class="text-2xl italic font-medium text-gray-900 dark:text-white">"Set Your Dream Alight, Let
-                        Your Imagination Take Flight."</p>
+                    <p class="text-2xl italic font-medium text-gray-900 dark:text-white">
+                        {{ $homeContent->quote }}
+                    </p>
                 </blockquote>
             </figure>
-            {{-- <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
-                Kegiatan ini terbuka untuk seluruh siswa/i di Indonesia tanpa terkecuali, dengan timeline pelaksanaan
-                tertera pada paduan perlombaan.</p> --}}
             <div class="inline-flex items-center justify-center w-full">
                 <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded ">
                 <div class="absolute px-4 -translate-x-1/2 bg-[#f9fafb] left-1/2 ">
@@ -133,15 +138,11 @@
     <div id="contact">
         <section class="bg-[#f9fafb] py-14 px-8">
             <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
-                English Fest merupakan hasil rancangan English Club Nusa Putra University, dibantu oleh pihak kampus
-                sebagai
-                support utama dalam pembinaan kegiatan ini. Klik tombol dibawah ini untuk gabung di group whatsapp </p>
-            <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
-                Semua cabang lomba tersebut diperuntukkan untuk siswa/i tingkat SMA/SMK/Sederajat.</p>
-
+                {{ $homeContent->contact_paragraph }}
+            </p>
             <div class="flex flex-wrap justify-center">
                 <!-- Card 1: WhatsApp -->
-                <a href="https://api.whatsapp.com/send?phone=6285720978940" target="_blank"
+                <a href="{{ $homeContent->whatsapp_link }}" target="_blank"
                     class="border border-green-500 max-w-sm w-full mx-4 my-4 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="flex items-center px-6 py-4">
                         <div class="flex-shrink-0">
@@ -165,7 +166,7 @@
                 </a>
 
                 <!-- Card 2: Email -->
-                <a href="mailto:englishclub@nusaputra.ac.id" target="_blank"
+                <a href="mailto:{{ $homeContent->email }}" target="_blank"
                     class="border border-[#1a9df7] max-w-sm w-full mx-4 my-4 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="flex items-center px-6 py-4">
                         <div class="flex-shrink-0">
@@ -188,7 +189,7 @@
                 </a>
 
                 <!-- Card 3: Instagram -->
-                <a href="https://www.instagram.com/englishfest_nsp/" target="_blank"
+                <a href="{{ $homeContent->instagram }}" target="_blank"
                     class="border border-pink-500 max-w-sm w-full mx-4 my-4 bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
                     <div class="flex items-center px-6 py-4">
                         <div class="flex-shrink-0">
@@ -246,17 +247,7 @@
                 </div>
                 <div class="max-w-md">
                     <p class="text-lg text-gray-800 leading-relaxed">
-                        English Club yang berada di Universitas Nusa Putra adalah sebuah kelompok atau organisasi di
-                        kampus tersebut di mana mahasiswa dan mungkin juga staf akademik berkumpul untuk belajar,
-                        berlatih, dan meningkatkan kemampuan berbahasa Inggris mereka secara bersama-sama. Klub ini
-                        terbuka untuk siapa saja yang terdaftar di universitas tersebut dan tertarik untuk meningkatkan
-                        kemampuan berbahasa Inggris mereka.
-                    </p>
-                    <br>
-                    <p class="text-lg text-gray-800 leading-relaxed">
-                        English Club Universitas Nusa Putra bertujuan untuk menciptakan lingkungan yang mendukung dan
-                        menyenangkan bagi anggotanya dalam usaha mereka untuk meningkatkan kemampuan bahasa Inggris dan
-                        memahami budaya berbahasa Inggris.
+                        {{ $homeContent->about_paragraph }}
                     </p>
                 </div>
             </div>

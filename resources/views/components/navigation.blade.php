@@ -2,8 +2,7 @@
     <nav class="z-40 fixed w-full bg-white border border-b-[#1a9df7] px-4 lg:px-6 py-4">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="{{ asset('assets/img/logo.png') }}" class="w-16 mr-5" alt="Flowbite Logo" />
-                {{-- <span class="self-center text-2xl font-semibold whitespace-nowrap">{{ config('app.name') }}</span> --}}
+                <img src="{{ asset('storage/' . $homeContent->logo_image) }}" class="mr-3 h-8" alt="English Club" />
             </a>
             <div class="flex items-center lg:order-2">
                 @if (Auth::user())

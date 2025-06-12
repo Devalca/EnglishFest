@@ -5,6 +5,9 @@ namespace App\Providers;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
+use App\Models\HomeContent;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('currency', function ($expression) {
             return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
         });
+        if (Schema::hasTable('home_contents')) {
+            View::share('homeContent', HomeContent::first());
+        }
     }
 }

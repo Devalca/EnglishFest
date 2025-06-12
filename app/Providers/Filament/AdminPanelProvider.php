@@ -32,11 +32,11 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Green,
             ])
             ->navigationItems([
-                NavigationItem::make('dashboard')
+                NavigationItem::make('Home')
                     ->icon('heroicon-s-home')
-                    ->label(fn (): string => __('filament-panels::pages/dashboard.title'))
+                    ->label('Landing Page')
                     ->url('/')
-                    ->isActiveWhen(fn () => request()->routeIs('filament.admin.pages.dashboard')),
+                    // ->isActiveWhen(fn () => request()->routeIs('filament.admin.pages.dashboard')),
             ])
             ->userMenuItems([
                 MenuItem::make()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Competition;
 use App\Models\Contest;
+use App\Models\HomeContent;
 use Illuminate\Http\Request;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +24,14 @@ class HomesController extends Controller
     public function home()
     {
         $today = Carbon::today();
+        $homeContent = HomeContent::first();
         $programs = Contest::whereDate('time_start', '<=', $today)
             ->whereDate('time_end', '>=', $today)
             ->get();
         return view('welcome', [
             'contests' => Contest::where('parent_id', null)->get(),
-            'programs' => $programs
+            'programs' => $programs,
+            'homeContent' => $homeContent
         ]);
     }
 
