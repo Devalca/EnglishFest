@@ -19,4 +19,9 @@ class Contest extends Model
     {
         return $this->hasMany(Contest::class, 'parent_id', 'id');
     }
+
+    public function academicPeriod()
+    {
+        return $this->belongsTo(AcademicPeriod::class);
+    }
 }

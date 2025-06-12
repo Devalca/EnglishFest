@@ -15,6 +15,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -42,21 +43,21 @@ class ContestResource extends Resource
                             ->relationship(
                                 name: 'parent',
                                 titleAttribute: 'program_name',
-                                modifyQueryUsing: fn (Builder $query) => $query->where('parent_id', null),
+                                modifyQueryUsing: fn(Builder $query) => $query->where('parent_id', null),
                             ),
                         Forms\Components\TextInput::make('program_name')
                             ->label('Nama Program Untuk Lomba Tertentu')->required(),
                         Forms\Components\FileUpload::make('image')
                             ->required()
                             ->label('Gambar Lomba')
-                            ->hidden(fn (Get $get) => $get('parent_id') == null)
+                            ->hidden(fn(Get $get) => $get('parent_id') == null)
                             ->directory('file-contest')
                             ->acceptedFileTypes(['image/png', 'image/jpeg'])
                             ->downloadable(),
                         Forms\Components\FileUpload::make('guidelines')
                             ->required()
                             ->label('Panduan')
-                            ->hidden(fn (Get $get) => $get('parent_id') == null)
+                            ->hidden(fn(Get $get) => $get('parent_id') == null)
                             ->directory('file-guidelines')
                             ->acceptedFileTypes([
                                 'application/pdf',
@@ -65,8 +66,13 @@ class ContestResource extends Resource
                     ])->columnSpan(8),
                 Section::make()
                     ->schema([
-                        DatePicker::make('time_start')->hidden(fn (Get $get) => $get('parent_id') == null)->required(),
-                        DatePicker::make('time_end')->hidden(fn (Get $get) => $get('parent_id') == null)->required(),
+                        Forms\Components\Select::make('academic_period_id')
+                            ->label('Periode Tahun Akademik')
+                            ->relationship('academicPeriod', 'name')
+                            ->searchable()
+                            ->required(),
+                        DatePicker::make('time_start')->hidden(fn(Get $get) => $get('parent_id') == null)->required(),
+                        DatePicker::make('time_end')->hidden(fn(Get $get) => $get('parent_id') == null)->required(),
                     ])->columnSpan(4),
                 Forms\Components\Textarea::make('desc')
                     ->label('Keterangan Lomba')->columnSpanFull(),
@@ -74,45 +80,53 @@ class ContestResource extends Resource
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
-                    ->label('PERSYARATAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+                    ->label('PERSYARATAN')->hidden(fn(Get $get) => $get('parent_id') == null)->columnSpanFull(),
                 RichEditor::make('terms')
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
-                    ->label('KETENTUAN DAN TAHAPAN PERLOMBAAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+                    ->label('KETENTUAN DAN TAHAPAN PERLOMBAAN')->hidden(fn(Get $get) => $get('parent_id') == null)->columnSpanFull(),
                 RichEditor::make('assessment')
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
-                    ->label('ASPEK PENILAIAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+                    ->label('ASPEK PENILAIAN')->hidden(fn(Get $get) => $get('parent_id') == null)->columnSpanFull(),
                 RichEditor::make('awards')
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
-                    ->label('HADIAH DAN PENGHARGAAN')->hidden(fn (Get $get) => $get('parent_id') == null)->columnSpanFull(),
+                    ->label('HADIAH DAN PENGHARGAAN')->hidden(fn(Get $get) => $get('parent_id') == null)->columnSpanFull(),
             ])->columns(12);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(null)
             ->columns([
-                Tables\Columns\TextColumn::make('parent_id'),
-                Tables\Columns\TextColumn::make('program_name'),
-                Tables\Columns\TextColumn::make('desc')->limit(20),
+                Tables\Columns\TextColumn::make('academicPeriod.year')->wrap()->label('Periode Lomba'),
+                Tables\Columns\TextColumn::make('program_name')
+                    ->wrap()
+                    ->description(
+                        fn($record) => $record->parent?->program_name ?? 'Nama Group Kontes',
+                        position: 'above'
+                    ),
+                Tables\Columns\TextColumn::make('desc')->wrap(),
                 Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\TextColumn::make('guidelines')->limit(20),
+                Tables\Columns\TextColumn::make('guidelines')->wrap(),
             ])
             ->filters([
-                //
+                SelectFilter::make('academic_period_id')
+                    ->label('Filter Periode')
+                    ->relationship('academicPeriod', 'name'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Detail'),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
