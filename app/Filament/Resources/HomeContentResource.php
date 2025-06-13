@@ -15,6 +15,9 @@ use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+
+// HAPUS FILE APAPUN KETIKA MELAKUKAN EDIT
 
 class HomeContentResource extends Resource
 {
@@ -26,13 +29,33 @@ class HomeContentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
 
-    // Disable create
+    public static function canViewAny(): bool
+    {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin == true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin == true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function canCreate(): bool
     {
         return false;
     }
 
-    // Disable delete per record
     public static function canDelete(Model $record): bool
     {
         return false;
@@ -40,7 +63,13 @@ class HomeContentResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return true;
+        if (Auth::check()) {
+            if (Auth::user()->is_admin == true) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function form(Form $form): Form
@@ -61,13 +90,17 @@ class HomeContentResource extends Resource
                                         FileUpload::make('hero_image')
                                             ->label('Gambar Hero')
                                             ->image()
-                                            ->directory('homeContent')
-                                            ->disk('public'),
+                                            ->disk('public')
+                                            ->directory('file-home')
+                                            ->preserveFilenames(false)
+                                            ->getUploadedFileNameForStorageUsing(fn($file) => 'hero-' . time() . '.' . $file->getClientOriginalExtension()),
                                         FileUpload::make('logo_image')
-                                            ->label('Logo')
+                                            ->label('Gambar Logo')
                                             ->image()
-                                            ->directory('homeContent')
-                                            ->disk('public'),
+                                            ->disk('public')
+                                            ->directory('file-home')
+                                            ->preserveFilenames(false)
+                                            ->getUploadedFileNameForStorageUsing(fn($file) => 'logo-' . time() . '.' . $file->getClientOriginalExtension()),
                                     ]),
                             ]),
                     ]),
@@ -114,17 +147,14 @@ class HomeContentResource extends Resource
     {
         return $table
             ->columns([
-                // contoh kolom
-                Tables\Columns\TextColumn::make('title')->label('Judul'),
-                Tables\Columns\TextColumn::make('whatsapp_link')->label('WhatsApp'),
-                Tables\Columns\TextColumn::make('email')->label('Email'),
+                Tables\Columns\TextColumn::make('title')->wrap()->label('Title'),
+                Tables\Columns\TextColumn::make('description')->wrap()->label('Description'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                // tidak ada delete action
             ])
             ->bulkActions([
                 // Nonaktifkan delete bulk action supaya tidak bisa hapus massal

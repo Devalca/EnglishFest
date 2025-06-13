@@ -61,12 +61,17 @@ class User extends Authenticatable implements FilamentUser
                 }
                 break;
             default:
-                  if ($this->is_admin || $this->is_rator) {
-                      return false; // Masuk ke panel admin
-                  } else {
-                      return true; // Tidak memenuhi syarat untuk panel admin
-                  }
+                if ($this->is_admin || $this->is_rator) {
+                    return false; // Masuk ke panel admin
+                } else {
+                    return true; // Tidak memenuhi syarat untuk panel admin
+                }
                 break;
         }
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === true;
     }
 }

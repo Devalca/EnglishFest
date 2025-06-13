@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('academic_periods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('year');
-            $table->enum('semester', ['Ganjil', 'Genap']);
+            $table->string('year')->unique();
             $table->boolean('active')->default(false);
             $table->timestamps();
         });

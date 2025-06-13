@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicPeriod;
 use App\Models\Competition;
 use App\Models\Contest;
 use App\Models\HomeContent;
@@ -25,11 +26,12 @@ class HomesController extends Controller
     {
         $today = Carbon::today();
         $homeContent = HomeContent::first();
+        $latestPeriod = AcademicPeriod::orderByDesc('year')->first();
         $programs = Contest::whereDate('time_start', '<=', $today)
             ->whereDate('time_end', '>=', $today)
             ->get();
         return view('welcome', [
-            'contests' => Contest::where('parent_id', null)->get(),
+            'contests' => Contest::where('parent_id', null)->where('academic_period_id', $latestPeriod->id)->get(),
             'programs' => $programs,
             'homeContent' => $homeContent
         ]);

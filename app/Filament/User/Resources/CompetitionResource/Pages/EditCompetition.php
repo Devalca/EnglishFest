@@ -3,6 +3,7 @@
 namespace App\Filament\User\Resources\CompetitionResource\Pages;
 
 use App\Filament\User\Resources\CompetitionResource;
+use Carbon\Carbon;
 use Filament\Actions;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
@@ -23,7 +24,21 @@ class EditCompetition extends EditRecord
                         Notification::make()
                             ->danger()
                             ->title('Anda Siapa???')
-                            ->body('Sepertinya Pendaftaran ini Milik orang lain?')
+                            ->body('Sepertinya pendaftaran ini milik orang lain?')
+                            ->persistent()
+                            ->send();
+
+                        $action->cancel();
+                        return;
+                    }
+
+                    $competitionYear = $this->record->contest?->academicPeriod?->year;
+
+                    if ($competitionYear && intval($competitionYear) < Carbon::now()->year) {
+                        Notification::make()
+                            ->danger()
+                            ->title('Tidak Bisa Menghapus')
+                            ->body("Pendaftaran untuk periode $competitionYear sudah berakhir.")
                             ->persistent()
                             ->send();
 

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ContestResource\Pages;
 use App\Filament\Resources\ContestResource\RelationManagers;
 use App\Models\Contest;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\MarkdownEditor;
@@ -15,6 +16,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -44,7 +46,9 @@ class ContestResource extends Resource
                                 name: 'parent',
                                 titleAttribute: 'program_name',
                                 modifyQueryUsing: fn(Builder $query) => $query->where('parent_id', null),
-                            ),
+                            )
+                            ->searchable(['program_name'])
+                            ->getOptionLabelFromRecordUsing(fn($record) => "{$record->program_name} | Periode Lomba : Tahun {$record->academicPeriod->name}"),
                         Forms\Components\TextInput::make('program_name')
                             ->label('Nama Program Untuk Lomba Tertentu')->required(),
                         Forms\Components\FileUpload::make('image')
@@ -70,6 +74,8 @@ class ContestResource extends Resource
                             ->label('Periode Tahun Akademik')
                             ->relationship('academicPeriod', 'name')
                             ->searchable()
+                            ->native(false)
+                            ->preload()
                             ->required(),
                         DatePicker::make('time_start')->hidden(fn(Get $get) => $get('parent_id') == null)->required(),
                         DatePicker::make('time_end')->hidden(fn(Get $get) => $get('parent_id') == null)->required(),
@@ -117,9 +123,28 @@ class ContestResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('academic_period_id')
-                    ->label('Filter Periode')
-                    ->relationship('academicPeriod', 'name'),
+                    ->label('Periode Lomba')
+                    ->options(function () {
+                        return \App\Models\AcademicPeriod::orderBy('year', 'desc')
+                            ->pluck('year', 'id')
+                            ->toArray();
+                    })
+                    ->default(function () {
+                        $currentYear = Carbon::now()->year;
+                        $period = \App\Models\AcademicPeriod::where('year', $currentYear)->first();
+                        return $period ? $period->id : null;
+                    })
+                    ->query(function (Builder $query, $data) {
+                        if (isset($data['value']) && $data['value']) {
+                            $query->where('academic_period_id', $data['value']);
+                        }
+                    })
+                    ->searchable()
+                    ->native(false)
+                    ->preload()
+
             ])
+            ->filtersLayout(FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make()->label('Detail'),
             ])

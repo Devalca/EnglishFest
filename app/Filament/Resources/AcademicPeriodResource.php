@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class AcademicPeriodResource extends Resource
 {
@@ -27,6 +28,50 @@ class AcademicPeriodResource extends Resource
     protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
+
+    public static function canViewAny(): bool
+    {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin == true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function canCreate(): bool
+    {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin == true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin == true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function canDelete($record): bool
+    {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin == true) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public static function getAcademicYearsOptions(): array
     {
@@ -54,14 +99,7 @@ class AcademicPeriodResource extends Resource
                 Select::make('year')
                     ->label('Tahun Akademik')
                     ->options(self::getAcademicYearsOptions())
-                    ->required(),
-
-
-                Select::make('semester')
-                    ->options([
-                        'Ganjil' => 'Ganjil',
-                        'Genap' => 'Genap',
-                    ])
+                    ->unique(ignorable: fn($record) => $record)
                     ->required(),
 
                 Toggle::make('active')
@@ -75,7 +113,6 @@ class AcademicPeriodResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('year'),
-                TextColumn::make('semester'),
                 IconColumn::make('active')
                     ->boolean()
                     ->label('Aktif'),
