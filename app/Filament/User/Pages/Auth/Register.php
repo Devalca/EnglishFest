@@ -9,7 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Auth\Register as BaseRegister;
 
-class Register extends BaseRegister 
+class Register extends BaseRegister
 {
     // protected static ?string $navigationIcon = 'heroicon-o-document-text';
     // protected static string $view = 'filament.user.pages.auth.register';
@@ -20,7 +20,7 @@ class Register extends BaseRegister
             'form' => $this->form(
                 $this->makeForm()
                     ->schema([
-                        $this->getNameFormComponent()->label('Username'),
+                        $this->getNameFormComponent()->label('Nama Lengkap'),
                         $this->getRoleFormComponent(),
                         $this->getEmailFormComponent(),
                         $this->getPasswordFormComponent(),
@@ -30,9 +30,9 @@ class Register extends BaseRegister
             ),
         ];
     }
- 
+
     protected function getRoleFormComponent(): Component
     {
-        return TextInput::make('education')->label('School Name')->required();
+        return TextInput::make('education')->label('Nama Sekolah')->required();
     }
 }
