@@ -66,10 +66,10 @@
         <section class="bg-white">
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
                 <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
-                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Bidang
-                        Kompetisi</h2>
-                    <p class="font-light text-gray-500 lg:mb-16 sm:text-xl">Pilihlah bidang kompetisi
-                        yang sesuai untuk kalian</p>
+                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Eksplorasi Bidang Kompetisi &
+                        Program Unggulan</h2>
+                    <p class="font-light text-gray-500 lg:mb-16 sm:text-xl">Tingkatkan kemampuan dan pengalamanmu
+                        melalui beragam kompetisi dan program inspiratif dari kami</p>
                 </div>
                 @foreach ($contests as $item)
                     <h4 class="my-5 text-3xl font-extrabold text-gray-900 text-center lg:text-left">
@@ -138,7 +138,7 @@
     <div id="contact">
         <section class="bg-[#f9fafb] py-14 px-8">
             <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
-                {{ $homeContent->contact_paragraph }}
+                {!! $homeContent->contact_paragraph !!}
             </p>
             <div class="flex flex-wrap justify-center">
                 <!-- Card 1: WhatsApp -->

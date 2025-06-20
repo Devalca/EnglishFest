@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
 
             $table->string('title')->nullable();                 // Judul utama hero
-            $table->text('description')->nullable();             // Deskripsi hero
+            $table->longText('description')->nullable();             // Deskripsi hero
             $table->string('hero_image')->nullable();             // Gambar hero
 
             $table->string('logo_image')->nullable();             // Logo tambahan
 
             $table->text('quote')->nullable();                    // Quote
 
-            $table->text('contact_paragraph')->nullable();       // Gabungan paragraf kontak
+            $table->longText('contact_paragraph')->nullable();       // Gabungan paragraf kontak
 
             $table->string('whatsapp_link')->nullable();          // Link WA
             $table->string('email')->nullable();                   // Email
@@ -34,7 +34,7 @@ return new class extends Migration
 
             $table->json('fees')->nullable();                      // Repeater biaya (json)
 
-            $table->text('about_paragraph')->nullable();          // Tentang kami gabungan paragraf
+            $table->longText('about_paragraph')->nullable();          // Tentang kami gabungan paragraf
 
             $table->json('cs')->nullable();                        // Customer Service (json repeater)
 

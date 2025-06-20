@@ -7,6 +7,7 @@ use App\Models\HomeContent;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -83,7 +84,13 @@ class HomeContentResource extends Resource
                                 Grid::make()
                                     ->schema([
                                         TextInput::make('title')->label('Judul Utama')->columnSpanFull(),
-                                        Textarea::make('description')->rows(10)->label('Deskripsi')->columnSpanFull(),
+                                        RichEditor::make('description')
+
+                                            ->label('Deskripsi')
+                                            ->disableToolbarButtons([
+                                                'attachFiles',
+                                            ])
+                                            ->columnSpanFull(),
                                     ]),
                                 Grid::make()
                                     ->schema([
@@ -110,7 +117,12 @@ class HomeContentResource extends Resource
                     ]),
                 Section::make('Kontak & Sosial Media')
                     ->schema([
-                        Textarea::make('contact_paragraph')->rows(10)->label('Paragraf Kontak'),
+                        RichEditor::make('contact_paragraph')
+
+                            ->label('Paragraf Kontak')
+                            ->disableToolbarButtons([
+                                'attachFiles',
+                            ]),
                         TextInput::make('whatsapp_link')->label('Link WhatsApp'),
                         TextInput::make('email')->label('Email'),
                         TextInput::make('instagram')->label('Instagram'),
@@ -128,8 +140,8 @@ class HomeContentResource extends Resource
                     ]),
                 Section::make('Biaya')
                     ->schema([
-                        TextInput::make('payment_title')->label('Nomor Dana/OVO'),
-                        TextInput::make('payment_number')->label('Nomor Dana/OVO'),
+                        TextInput::make('payment_title')->label('Nama E-Wallet/Bank'),
+                        TextInput::make('payment_number')->label('Nomor E-Wallet/Bank'),
                         TextInput::make('payment_owner')->label('A.N (Pemilik Rekening)'),
                         Repeater::make('fees')->schema([
                             TextInput::make('title')->label('Jenis Lomba'),
@@ -138,7 +150,12 @@ class HomeContentResource extends Resource
                     ]),
                 Section::make('Tentang Kami')
                     ->schema([
-                        Textarea::make('about_paragraph')->rows(10)->label('Paragraf Tentang Kami'),
+                        RichEditor::make('about_paragraph')
+
+                            ->label('Paragraf Tentang Kami')
+                            ->disableToolbarButtons([
+                                'attachFiles',
+                            ])
                     ]),
             ]);
     }

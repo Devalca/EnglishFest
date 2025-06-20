@@ -33,14 +33,14 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('education')
                     ->helperText('Nama Sekolah/Kampus'),
-                Forms\Components\TextInput::make('email')->email()->unique(ignorable: fn ($record) => $record)->required(),
+                Forms\Components\TextInput::make('email')->email()->unique(ignorable: fn($record) => $record)->required(),
                 Forms\Components\TextInput::make('password')
                     ->password()
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context): bool => $context === 'create'),
+                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                    ->dehydrated(fn($state) => filled($state))
+                    ->required(fn(string $context): bool => $context === 'create'),
                 Section::make()
-                    ->visible(auth()->user()->is_admin == true)
+                    ->visible(auth()->user()->is_admin == true && auth()->user()->email == "saepul.rahman@nusaputra.ac.id")
                     ->schema([
                         Forms\Components\Toggle::make('is_admin')->label('Admin')->inline(),
                         Forms\Components\Toggle::make('is_rator')->label('Operator')->inline(),
@@ -64,9 +64,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('education'),
             ])
-            ->filters([
-
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
