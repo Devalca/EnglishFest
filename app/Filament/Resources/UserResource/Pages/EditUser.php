@@ -15,7 +15,7 @@ class EditUser extends EditRecord
     protected function getHeaderActions(): array
     {
         $cek = $this->record;
-        if ($cek != true) {
+        if (auth()->user()->email === "saepul.rahman@nusaputra.ac.id") {
             return [
                 Actions\DeleteAction::make(),
                 // Actions\DeleteAction::make()

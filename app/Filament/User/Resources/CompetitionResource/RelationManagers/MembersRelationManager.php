@@ -50,17 +50,17 @@ class MembersRelationManager extends RelationManager
                 Forms\Components\DatePicker::make('date_birth')
                     ->disabled($disabled)
                     ->label('Tanggal Lahir'),
-                Forms\Components\FileUpload::make('payment_proof')
-                    ->disabled($disabled)
-                    ->label('Bukti Pembayaran')
-                    ->directory('file-payment/' . auth()->user()->id)
-                    ->acceptedFileTypes(['image/jpeg', 'image/png'])
-                    ->downloadable()
-                    ->preserveFilenames(false)
-                    ->getUploadedFileNameForStorageUsing(fn($file) => $this->ownerRecord->user_id . '-' . time() . '.' . $file->getClientOriginalExtension())
-                    ->optimize('webp')
-                    ->resize(20)
-                    ->required(),
+                // Forms\Components\FileUpload::make('payment_proof')
+                //     ->disabled($disabled)
+                //     ->label('Bukti Pembayaran')
+                //     ->directory('file-payment/' . auth()->user()->id)
+                //     ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                //     ->downloadable()
+                //     ->preserveFilenames(false)
+                //     ->getUploadedFileNameForStorageUsing(fn($file) => $this->ownerRecord->user_id . '-' . time() . '.' . $file->getClientOriginalExtension())
+                //     ->optimize('webp')
+                //     ->resize(20)
+                //     ->required(),
             ]);
     }
 

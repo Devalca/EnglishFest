@@ -33,16 +33,16 @@ class MembersRelationManager extends RelationManager
                     ->numeric()
                     ->unique(ignorable: fn($record) => $record)->required(),
                 Forms\Components\DatePicker::make('date_birth'),
-                Forms\Components\FileUpload::make('payment_proof')
-                    ->label('Bukti Pembayaran')
-                    ->directory('file-payment/' . $owner)
-                    ->acceptedFileTypes(['image/jpeg', 'image/png'])
-                    ->downloadable()
-                    ->preserveFilenames(false)
-                    ->getUploadedFileNameForStorageUsing(fn($file) => $this->ownerRecord->user_id . '-' . time() . '.' . $file->getClientOriginalExtension())
-                    ->optimize('webp')
-                    ->resize(20)
-                    ->required(),
+                // Forms\Components\FileUpload::make('payment_proof')
+                //     ->label('Bukti Pembayaran')
+                //     ->directory('file-payment/' . $owner)
+                //     ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                //     ->downloadable()
+                //     ->preserveFilenames(false)
+                //     ->getUploadedFileNameForStorageUsing(fn($file) => $this->ownerRecord->user_id . '-' . time() . '.' . $file->getClientOriginalExtension())
+                //     ->optimize('webp')
+                //     ->resize(20)
+                //     ->required(),
             ]);
     }
 

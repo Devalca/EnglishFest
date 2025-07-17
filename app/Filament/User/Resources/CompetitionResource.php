@@ -16,11 +16,11 @@ use Filament\Forms\Get;
 
 class CompetitionResource extends Resource
 {
-    protected static ?string $navigationLabel = 'Kompetisi';
+    protected static ?string $navigationLabel = 'Programs';
 
     protected static ?string $model = Competition::class;
 
-    protected static ?string $modelLabel = 'Kompetisi';
+    protected static ?string $modelLabel = 'Programs';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

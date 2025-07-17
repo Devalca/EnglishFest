@@ -42,13 +42,24 @@ class ContestResource extends Resource
                             ->hintColor('danger')
                             ->helperText(new HtmlString('<span style="color: green;">Pilih Lomba Untuk Mendaftarkan Program Lomba</span>'))
                             ->live()
+                            ->native(false)
+                            ->preload()
                             ->relationship(
                                 name: 'parent',
                                 titleAttribute: 'program_name',
-                                modifyQueryUsing: fn(Builder $query) => $query->where('parent_id', null),
+                                modifyQueryUsing: function (Builder $query) {
+                                    $currentYear = Carbon::now()->year;
+
+                                    $query->whereNull('parent_id')
+                                        ->whereHas('academicPeriod', function (Builder $query) use ($currentYear) {
+                                            $query->where('name', $currentYear);
+                                        });
+                                }
                             )
                             ->searchable(['program_name'])
-                            ->getOptionLabelFromRecordUsing(fn($record) => "{$record->program_name} | Periode Lomba : Tahun {$record->academicPeriod->name}"),
+                            ->getOptionLabelFromRecordUsing(
+                                fn($record) => "{$record->program_name} | Periode Lomba : Tahun {$record->academicPeriod->name}"
+                            ),
                         Forms\Components\TextInput::make('program_name')
                             ->label('Nama Program Untuk Lomba Tertentu')->required(),
                         Forms\Components\FileUpload::make('image')

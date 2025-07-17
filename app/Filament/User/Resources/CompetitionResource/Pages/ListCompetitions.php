@@ -13,7 +13,7 @@ class ListCompetitions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Daftar Kompetisi'),
+            Actions\CreateAction::make()->label('Daftar Program'),
         ];
     }
 }

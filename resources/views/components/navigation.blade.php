@@ -86,7 +86,7 @@
                     <li>
                         <a href="{{ url('') == url()->current() ? '#compe' : url('') . '#compe' }}"
                             class="nav-link block py-2 px-3 hover:text-[#1a9df7] md:bg-transparent md:p-0"
-                            aria-current="page"> Kompetisi
+                            aria-current="page"> Kompetisi & Program
                         </a>
                     </li>
                     <li>
