@@ -56,6 +56,9 @@ class CompetitionResource extends Resource
         return $table
             ->recordUrl(null)
             ->columns([
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat pada')
+                    ->date('d-m-Y'),
                 Tables\Columns\TextColumn::make('contest.academicPeriod.year')->wrap()->label('Periode Lomba'),
                 Tables\Columns\TextColumn::make('user.education')
                     ->wrap()

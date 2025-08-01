@@ -24,4 +24,9 @@ class Competition extends Model
     {
         return $this->hasMany(Member::class);
     }
+
+    public function academicPeriod()
+    {
+        return $this->belongsTo(AcademicPeriod::class);
+    }
 }

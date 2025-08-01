@@ -45,8 +45,38 @@ class MembersRelationManager extends RelationManager
                 Forms\Components\TextInput::make('number')
                     ->label('NISN')
                     ->numeric()
-                    ->disabled($disabled)
-                    ->unique(ignorable: fn($record) => $record)->required(),
+                    ->required()
+                    ->rule(function () {
+                        return function (string $attribute, $value, \Closure $fail) {
+                            $competition = $this->ownerRecord;
+                            $contest = $competition->contest;
+
+                            if (! $contest) {
+                                $fail("Kontes tidak ditemukan.");
+                                return;
+                            }
+
+                            $academicPeriodId = $contest->academic_period_id;
+
+                            if (! $academicPeriodId) {
+                                $fail("Kontes belum terkait dengan periode akademik.");
+                                return;
+                            }
+
+                            $query = \App\Models\Member::where('number', $value)
+                                ->whereHas('competition.contest', function ($query) use ($academicPeriodId) {
+                                    $query->where('academic_period_id', $academicPeriodId);
+                                });
+
+                            if ($this->ownerRecord) {
+                                $query->where('id', '!=', $this->ownerRecord->id);
+                            }
+
+                            if ($query->exists()) {
+                                $fail("NISN ini sudah terdaftar pada periode akademik yang sama.");
+                            }
+                        };
+                    }),
                 Forms\Components\DatePicker::make('date_birth')
                     ->disabled($disabled)
                     ->label('Tanggal Lahir'),
@@ -72,7 +102,7 @@ class MembersRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('number'),
+                Tables\Columns\TextColumn::make('number')->label('NISN'),
                 Tables\Columns\TextColumn::make('date_birth'),
                 Tables\Columns\ImageColumn::make('payment_proof')
                     ->label('Bukti Pembayaran')

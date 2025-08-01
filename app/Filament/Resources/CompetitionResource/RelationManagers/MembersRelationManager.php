@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CompetitionResource\RelationManagers;
 
+use App\Models\Member;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -28,10 +29,44 @@ class MembersRelationManager extends RelationManager
                 Forms\Components\TextInput::make('phone')
                     ->tel()
                     ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'),
+
                 Forms\Components\TextInput::make('number')
                     ->label('NISN')
                     ->numeric()
-                    ->unique(ignorable: fn($record) => $record)->required(),
+                    ->required()
+                    ->rule(function () {
+                        return function (string $attribute, $value, \Closure $fail) {
+                            $competition = $this->ownerRecord;
+                            $contest = $competition->contest;
+
+                            if (! $contest) {
+                                $fail("Kontes tidak ditemukan.");
+                                return;
+                            }
+
+                            $academicPeriodId = $contest->academic_period_id;
+
+                            if (! $academicPeriodId) {
+                                $fail("Kontes belum terkait dengan periode akademik.");
+                                return;
+                            }
+
+                            $query = \App\Models\Member::where('number', $value)
+                                ->whereHas('competition.contest', function ($query) use ($academicPeriodId) {
+                                    $query->where('academic_period_id', $academicPeriodId);
+                                });
+
+                            if ($this->ownerRecord) {
+                                $query->where('id', '!=', $this->ownerRecord->id);
+                            }
+
+                            if ($query->exists()) {
+                                $fail("NISN ini sudah terdaftar pada periode akademik yang sama.");
+                            }
+                        };
+                    }),
+
+
                 Forms\Components\DatePicker::make('date_birth'),
                 // Forms\Components\FileUpload::make('payment_proof')
                 //     ->label('Bukti Pembayaran')
@@ -69,7 +104,7 @@ class MembersRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('number'),
+                Tables\Columns\TextColumn::make('number')->label('NISN'),
                 Tables\Columns\TextColumn::make('date_birth'),
                 Tables\Columns\ImageColumn::make('payment_proof')
                     ->label('Bukti Pembayaran')

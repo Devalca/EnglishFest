@@ -10,7 +10,7 @@ class Member extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function competitions()
+    public function competition()
     {
         return $this->belongsTo(Competition::class, 'competition_id', 'id');
     }

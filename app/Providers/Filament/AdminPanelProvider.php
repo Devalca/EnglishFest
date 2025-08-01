@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->sidebarCollapsibleOnDesktop()
             ->colors([
                 'primary' => Color::Green,
             ])
@@ -36,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-s-home')
                     ->label('Landing Page')
                     ->url('/')
-                    // ->isActiveWhen(fn () => request()->routeIs('filament.admin.pages.dashboard')),
+                // ->isActiveWhen(fn () => request()->routeIs('filament.admin.pages.dashboard')),
             ])
             ->userMenuItems([
                 MenuItem::make()

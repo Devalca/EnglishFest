@@ -121,6 +121,9 @@ class ContestResource extends Resource
         return $table
             ->recordUrl(null)
             ->columns([
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat pada')
+                    ->date('d-m-Y'),
                 Tables\Columns\TextColumn::make('academicPeriod.year')->wrap()->label('Periode Lomba'),
                 Tables\Columns\TextColumn::make('program_name')
                     ->wrap()
