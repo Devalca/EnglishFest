@@ -123,9 +123,9 @@ class HomeContentResource extends Resource
                             ->disableToolbarButtons([
                                 'attachFiles',
                             ]),
-                        TextInput::make('whatsapp_link')->label('Link WhatsApp'),
                         TextInput::make('email')->label('Email'),
-                        TextInput::make('instagram')->label('Instagram'),
+                        TextInput::make('whatsapp_link')->label('Link WhatsApp Group'),
+                        TextInput::make('instagram')->label('Link Instagram'),
                     ]),
                 Section::make('Customer Service (CS)')
                     ->schema([

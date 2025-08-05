@@ -137,9 +137,11 @@
 
     <div id="contact">
         <section class="bg-[#f9fafb] py-14 px-8">
-            <p class="text-center mb-6 text-lg font-normal lg:text-xl sm:px-16 xl:px-48">
-                {!! $homeContent->contact_paragraph !!}
-            </p>
+            <div class="text-center my-6 sm:px-16 xl:px-48">
+                <p class="text-center text-lg font-normal lg:text-xl">
+                    {!! $homeContent->contact_paragraph !!}
+                </p>
+            </div>
             <div class="flex flex-wrap justify-center">
                 <!-- Card 1: WhatsApp -->
                 <a href="{{ $homeContent->whatsapp_link }}" target="_blank"
@@ -156,8 +158,8 @@
                             </svg>
                         </div>
                         <div class="ml-4">
-                            <div class="text-xl font-semibold text-green-500">WhatsApp</div>
-                            <div class="mt-2 text-gray-600">Kirim pesan WhatsApp</div>
+                            <div class="text-xl font-semibold text-green-500">WhatsApp Group</div>
+                            <div class="mt-2 text-gray-600">Join WhatsApp Group</div>
                             <div class="mt-2">
                                 <span class="text-green-500 hover:underline">Klik di sini</span>
                             </div>
@@ -211,7 +213,6 @@
                     </div>
                 </a>
             </div>
-
 
             <div class="py-2">
                 <div class="px-5 max-w-7xl mx-auto sm:px-6 lg:px-8">
